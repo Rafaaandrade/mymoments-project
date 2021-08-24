@@ -17,6 +17,8 @@ export const useStyles = makeStyles((theme) => ({
   fileInput: {
     width: "97%",
     margin: "10px 0",
+    display: "flex",
+    flexWrap: "wrap",
   },
   button: {
     marginBottom: 10,

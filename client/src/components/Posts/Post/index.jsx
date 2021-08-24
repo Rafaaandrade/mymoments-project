@@ -12,9 +12,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./style";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { likePost, removePost } from "../../../actions/posts";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Card className={styles.card}>
@@ -30,7 +33,11 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={styles.button_overlay}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </div>
@@ -39,18 +46,29 @@ const Post = ({ post }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={styles.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={styles.title} variant="h5" gutterBottom>
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.message}
         </Typography>
       </CardContent>
       <CardActions className={styles.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likePost(post._id))}
+        >
           <ThumbUpAltIcon fontSize="small" />
-          Curtir
+          &nbsp;Curtir &nbsp;
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(removePost(post._id))}
+        >
           <DeleteIcon fontSize="small" />
           Remover
         </Button>
