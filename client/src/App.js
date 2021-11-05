@@ -1,8 +1,18 @@
+import { Container } from "@material-ui/core";
 import React from "react";
-import Home from "./pages/Home";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./Approutes";
+import Header from "./components/Header";
 
 const App = () => {
-  return <Home />;
+  return (
+    <BrowserRouter> 
+    <Container maxWidth="lg">
+      <Header/>
+      <AppRoutes/>
+    </Container>
+    </BrowserRouter>
+  );
 };
 
 export default App;
